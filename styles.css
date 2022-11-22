@@ -36,7 +36,7 @@ button{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: right;
     background-color: azure;
     width: 95%;
     height: 20%;
@@ -45,8 +45,9 @@ button{
 }
 
 p{
-    font-size: 2em;
+    font-size: 12vw;
     font-weight: bold;
+    text-align: right;
 }
 
 .calculator_buttons{
