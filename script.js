@@ -1,4 +1,5 @@
 "useStrict";
+module.exports = Solve;
 
 let displayText;
 let solution;
@@ -81,4 +82,3 @@ function Solve(calculation){
    }
 
 }
-module.exports = Solve;

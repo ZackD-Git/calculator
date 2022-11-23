@@ -19,6 +19,7 @@
   "homepage": "https://github.com/ZackD-Git/calculator#readme",
   "devDependencies": {
     "-": "^0.0.1",
+    "jest": "^29.3.1",
     "y": "^0.3.2"
   }
 }
