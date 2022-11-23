@@ -81,3 +81,4 @@ function Solve(calculation){
    }
 
 }
+module.exports = Solve;

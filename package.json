@@ -19,5 +19,8 @@
   "homepage": "https://github.com/ZackD-Git/calculator#readme",
   "devDependencies": {
     "jest": "^29.3.1"
-  }
+  },
+  "modulePaths": [
+    "<rootDir>"
+  ]
 }
