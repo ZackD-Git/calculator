@@ -1,35 +1,21 @@
 "useStrict";
 
-let displayText;
+let displayText = document.getElementById("display_text");
 let solution;
 
-function Add(x,y){
-    return RoundToHundreth(x + y);
-}
-function Subtract(x,y){
-    return RoundToHundreth(x - y);
-}
-function Multiply(x,y){
-    return RoundToHundreth(x * y);
-}
-function Divide(x,y){
-    return RoundToHundreth(x / y)
-}
 
-function RoundToHundreth(float){
-   return Math.round((float + Number.EPSILON) * 100) / 100;
-}
-
-function Operate(...operation){
+function Operate(operation){
+    console.log("Operation: " + operation)
     switch(operation[1]){
         case "+":
-            return Add(operation[0], operation[2]);
+            console.log("plus");
+            return Number(operation[0] + operation[2]).toFixed(3);
         case "-": 
-            return Subtract(operation[0], operation[2]);
+            return Number(operation[0] - operation[2]).toFixed(3);
         case "*":
-            return Multiply(operation[0], operation[2])
+            return Number(operation[0] * operation[2]).toFixed(3);
         case "/": 
-            return Divide(operation[0], operation[2]);
+            return Number(operation[0] / operation[2]).toFixed(3);
         default:
             break;
     }
@@ -51,34 +37,74 @@ function ParseCalculation(calculationString){
 //Run Upon '=' Button press
 function Solve(calculation){
    let calculationArray = ParseCalculation(calculation);
+   console.log(calculationArray);
    let firstOperandIndex;
 
     while(calculationArray.length > 1){
         firstOperandIndex = Pemdas() - 1;
-        calucationArray.splice(firstOperandIndex, 0, Operate(calculationArray.splice(Pemdas - 1, 3)));
+        let result = Operate(calculationArray.splice(Pemdas() - 1, 3));
+        console.log("Result: " + result);
+        calculationArray.splice(firstOperandIndex, 0, result);
+        console.log(calculationArray);
     }
     
     solution = calculationArray[0];
     //Display Solution in displayText
+    return solution;
 
    function Pemdas(){
-    if(calculationArray.findIndex("*") !== -1)
+    if(calculationArray.findIndex((op) => {return op == "*"}) !== -1)
     {
-        return calculationArray.findIndex("*");
+        return calculationArray.findIndex((op) => {return op == "*"});
     }
-    if(calculationArray.findIndex("/") !== -1)
+    else if(calculationArray.findIndex((op) => {return op == "/"}) !== -1)
     {
-        return calculationArray.findIndex("/");
+        return calculationArray.findIndex((op) => {return op == "/"});
     }
-    if(calculationArray.findIndex("+") !== -1)
+    else if(calculationArray.findIndex((op) => {return op == "+"}) !== -1)
     {
-        return calculationArray.findIndex("+");
+        return calculationArray.findIndex((op) => {return op == "+"});
     }
-    if(calculationArray.findIndex("-") !== -1)
+    else if(calculationArray.findIndex((op) => {return op == "-"}) !== -1)
     {
-        return calculationArray.findIndex("-");
+        return calculationArray.findIndex((op) => {return op == "-"});
     }
    }
 
 }
-module.exports = Solve;
+
+function TextInput(character){
+    //No dots unless the previous character is a num
+    //No operator unless the previous character is a num
+
+    //If last character is a number allow anythin
+    //else only numbers
+    if(!isNaN(parseInt(displayText.innerHTML.slice(-1)))){
+        console.log("Last Char: " + parseInt(displayText.innerHTML.slice(-1)));
+        displayText.innerHTML += character.innerHTML;
+        console.log(character.class);
+    }
+    else{
+        switch(character.id){
+            case "add": break;
+            case "subtract": break;
+            case "multiply": break;
+            case "divide": break;
+            case "dot": break;
+            default: displayText.innerHTML += character.innerHTML;
+        }
+    }    
+}
+
+function Submit(){
+    //Check for divide by Zero
+    //Do nothing if string doesnt end with number
+    
+    displayText.innerHTML = Solve(displayText.innerHTML);
+}
+
+function ClearText(){
+    displayText.innerHTML = "";
+}
+
+//module.exports = Solve;
