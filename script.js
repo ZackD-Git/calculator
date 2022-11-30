@@ -8,34 +8,39 @@ function Operate(operation){
     console.log("Operation: " + operation)
     switch(operation[1]){
         case "+":
-            console.log("plus");
-            return Number(operation[0] + operation[2]).toFixed(3);
+            return RoundToHundredth(operation[0] + operation[2]);
         case "-": 
-            return Number(operation[0] - operation[2]).toFixed(3);
+            return RoundToHundredth(operation[0] - operation[2]);
         case "*":
-            return Number(operation[0] * operation[2]).toFixed(3);
+            return RoundToHundredth(operation[0] * operation[2]);
         case "/": 
-            return Number(operation[0] / operation[2]).toFixed(3);
+            return RoundToHundredth(operation[0] / operation[2]);
         default:
             break;
     }
 }
 
+function RoundToHundredth(float){
+    return Math.round((float * 100) / 100).toFixed(2);
+}
+
 function ParseCalculation(calculationString){
+    console.log(calculationString.split(" "))
     return calculationString.split(" ").map(ConvertNum);
 
     function ConvertNum(num){
-        if(isNaN(parseInt(num))){
+        if(isNaN(parseFloat(num))){
             return num;
         }
         else{
-            return parseInt(num)
+            return parseFloat(num)
         }
     }
 }
 
 //Run Upon '=' Button press
 function Solve(calculation){
+    console.log(calculation);
    let calculationArray = ParseCalculation(calculation);
    console.log(calculationArray);
    let firstOperandIndex;
