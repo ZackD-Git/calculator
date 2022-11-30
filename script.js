@@ -44,7 +44,7 @@ function Solve(calculation){
    let calculationArray = ParseCalculation(calculation);
    console.log(calculationArray);
    let firstOperandIndex;
-
+   
     while(calculationArray.length > 1){
         firstOperandIndex = Pemdas() - 1;
         let result = Operate(calculationArray.splice(Pemdas() - 1, 3));
@@ -55,7 +55,7 @@ function Solve(calculation){
     
     solution = calculationArray[0];
     //Display Solution in displayText
-    return solution;
+    return parseFloat(solution);
 
    function Pemdas(){
     if(calculationArray.findIndex((op) => {return op == "*"}) !== -1)
@@ -64,6 +64,12 @@ function Solve(calculation){
     }
     else if(calculationArray.findIndex((op) => {return op == "/"}) !== -1)
     {
+        if(calculationArray[calculationArray.findIndex((op) => {return op == "/"}) + 1] == 0 || 0.00){
+            alert("Nice Try");
+            ClearText();
+            calculationArray = [""];
+            return -1;
+        }
         return calculationArray.findIndex((op) => {return op == "/"});
     }
     else if(calculationArray.findIndex((op) => {return op == "+"}) !== -1)
