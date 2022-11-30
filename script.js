@@ -21,7 +21,7 @@ function Operate(operation){
 }
 
 function RoundToHundredth(float){
-    return Math.round((float * 100) / 100).toFixed(2);
+    return float.toFixed(2);
 }
 
 function ParseCalculation(calculationString){
